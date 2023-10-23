@@ -5,23 +5,37 @@ const routes = [
   {
     path: '/',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../page/login/Login.vue')
+    component: () => import(/* webpackChunkName: "Login" */ '../page/login/Login.vue')
   },
   {
     //
     path: '/index',
     name: 'index',
-    component: () => import(/* webpackChunkName: "index" */ '../page/index/index.vue'),
+    component: () => import(/* webpackChunkName: "Index" */ '../page/index/index.vue'),
     children: [//嵌套路由
+      // 用户列表
       {
         path: '/userpage',
         name: 'userpage',
-        component: () => import(/* webpackChunkName: "user" */ '@/page/userpage/user.vue')
+        component: () => import(/* webpackChunkName: "Userpage" */ '@/page/userpage/user.vue')
       },
+      //订单管理
       {
         path: '/order',
         name: 'order',
-        component: () => import(/* webpackChunkName: "order" */ '../page/order/order.vue')
+        component: () => import(/* webpackChunkName: "Order" */ '../page/order/order.vue')
+      },
+      //菜品管理
+      {
+        path: '/dishes',
+        name: 'dishes',
+        component: () => import(/* webpackChunkName: "Dishes" */ '../page/dishes/dishes.vue')
+      },
+      //添加菜品
+      {
+        path: '/dishesupload',
+        name: 'dishesupload',
+        component: () => import(/* webpackChunkName: "Dishesupload" */ '../page/dishesupload/dishesupload.vue')
       },
     ]
   },

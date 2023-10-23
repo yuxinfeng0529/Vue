@@ -11,7 +11,7 @@
             <p>桌号</p>
             <div>
                 <!-- 桌号下列框 -->
-                <el-select v-model="sevalue" class="m-2" placeholder="请选择桌号" size="large">
+                <el-select v-model="sevalue" class="m-2" placeholder="请选择桌号">
                     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
                 </el-select>
             </div>
@@ -116,7 +116,7 @@ export default {
         async function detail(index, id) {
             oper_data.dataload = index
             try {
-                const res = await new proxy.$request(proxy.$urls.m().vieworder + "?id" + id).modeget()
+                const res = await new proxy.$request(proxy.$urls.m().vieworder + "?id=" + id).modeget()
                 dialog.value.Son(res.data.data)
                 console.log(res)
                 oper_data.dataload = -1
