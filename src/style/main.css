@@ -118,14 +118,19 @@
 }
 
 /* 详细菜单 */
+.eat_cont {
+	height: 400px;
+	overflow-y: auto;
+}
+
+.eat-til {
+	color: #333;
+	margin: 30px 0px;
+}
+
 .eat-dan {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-top: 30px;
-}
-
-.eat-dia {
-	height: 300px;
-	overflow-y: auto;
+	margin: 30px 0px;
 }

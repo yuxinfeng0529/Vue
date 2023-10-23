@@ -6,7 +6,7 @@
             <div>
                 <!-- 日期范围选择器 -->
                 <el-date-picker v-model="time" type="daterange" range-separator="至" unlink-panels start-placeholder="开始时间"
-                    end-placeholder="结束时间" :size="size" />
+                    end-placeholder="结束时间" value-format="YYYY-MM-DD" />
             </div>
             <p>桌号</p>
             <div>
@@ -16,7 +16,7 @@
                 </el-select>
             </div>
             <div style="margin-left: 30px;">
-                <el-button type="success">查询</el-button>
+                <el-button type="success" @click="searchFun(time, sevalue)">查询</el-button>
             </div>
         </div>
 
@@ -27,8 +27,11 @@
                 <el-table-column prop="table_number" label="桌号" min-width="100" />
                 <el-table-column prop="number_of_diners" label="用餐人数" min-width="100" />
                 <el-table-column label="菜品详情" min-width="100">
+                    <!-- template里的组件下标，获取的值是scope.$index -->
                     <template #default="scope">
-                        <el-button type="default">详细菜单</el-button>
+                        <!-- scope.$index==dataload?true:false这个判断表示，如果点击的按钮下标是正整数或者0，那么就处于加载状态，否则处于不加载状态 -->
+                        <el-button type="default" @click="detail(scope.$index, scope.row._id)"
+                            :loading="scope.$index == dataload ? true : false">详细菜单</el-button>
                     </template>
                 </el-table-column>
                 <el-table-column prop="sett_amount" label="交易金额" min-width="100" />
@@ -42,13 +45,14 @@
             <!-- 分页 -->
             <el-pagination background layout="prev, pager, next" :total="total" @current-change="currentchange"
                 :hide-on-single-page="true" />
-            <Dialog></Dialog>
+            <!-- ref()这个方法里有一个value属性，我们可以通过value属性来改变值 -->
+            <Dialog ref="dialog"></Dialog>
         </div>
     </div>
 </template>
 
 <script>
-import { reactive, toRefs, getCurrentInstance, onMounted } from 'vue'
+import { reactive, toRefs, getCurrentInstance, onMounted, ref } from 'vue'
 import qs from 'qs'
 import Dialog from './components/dialog.vue'
 export default {
@@ -58,6 +62,8 @@ export default {
 
     setup() {
         const { proxy } = getCurrentInstance()
+        //ref 对象是可更改的，也就是说你可以为 .value 赋予新的值。它也是响应式的，即所有对 .value 的操作都将被追踪，并且写操作会触发与之相关的副作用。
+        const dialog = ref()
         //定义数据
         const oper_data = reactive({
             time: [],//选中的时间
@@ -66,6 +72,7 @@ export default {
             table_data: [],//表格数据
             page: 0,//当前页的数据
             total: 0,//数据总的条数
+            dataload: -1,
         })
         //生命周期的钩子函数，页面挂载之后，执行get_order()方法
         onMounted(() => {
@@ -96,6 +103,9 @@ export default {
                 new proxy.$tips('服务器错误', 'error').mess_age()
             }
         }
+        function searchFun(time, sevalue) {
+            get_order()
+        }
 
         //分页
         function currentchange(e) {
@@ -103,8 +113,18 @@ export default {
             get_order()
         }
 
-
-        return { ...toRefs(oper_data), currentchange }
+        async function detail(index, id) {
+            oper_data.dataload = index
+            try {
+                const res = await new proxy.$request(proxy.$urls.m().vieworder + "?id" + id).modeget()
+                dialog.value.Son(res.data.data)
+                console.log(res)
+                oper_data.dataload = -1
+            } catch (e) {
+                oper_data.dataload = -1
+            }
+        }
+        return { ...toRefs(oper_data), currentchange, detail, dialog, searchFun }
     }
 }
 </script>
