@@ -16,14 +16,29 @@ const urls = class {
         const obtainorder = `${url}/obtainorder`
         // 详细订单
         const vieworder = `${url}/vieworder`
-
+        // 图片上传接口
+        const uploadres = `${url}/uploadres`
+        // 菜品类目
+        const obtaincate = `${url}/obtaincate`
+        // 菜品单位
+        const obtainunit = `${url}/obtainunit`
+        //  自定义单位
+        const dishunit = `${url}/dishunit`
+        // 获取菜品
+        const putdishes = `${url}/putdishes`
+        
         return {
             register,
             login,
             pulluserlist,
             gettable,
             obtainorder,
-            vieworder
+            vieworder,
+            uploadres,
+            obtaincate,
+            obtainunit,
+            dishunit,
+            putdishes
         }
     }
 }
