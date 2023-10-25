@@ -8,13 +8,15 @@
 			<!-- @select是菜单激活回调的事件 -->
 			<el-menu :default-active="ac_index" @select="Select">
 				<div v-for="(item, index) in menu" :key="index">
-					<el-menu-item v-if="item.SubClass.length == 0" :index="item.id" @click="add_a(item.id)">
-						<el-icon>
-							<!-- component动态组件，可以根据名称来渲染组件 -->
-							<component :is="item.icon"></component>
-						</el-icon>
-						<span>{{ item.title }}</span>
-					</el-menu-item>
+					<router-link :to="{ path: item.router }">
+						<el-menu-item v-if="item.SubClass.length == 0" :index="item.id">
+							<el-icon>
+								<!-- component动态组件，可以根据名称来渲染组件 -->
+								<component :is="item.icon"></component>
+							</el-icon>
+							<span>{{ item.title }}</span>
+						</el-menu-item>
+					</router-link>
 					<el-sub-menu v-if="item.SubClass.length > 0" :index="item.id">
 						<template #title>
 							<el-icon>
@@ -23,7 +25,9 @@
 							<span>{{ item.title }}</span>
 						</template>
 						<div v-for="(two, two_index) in item.SubClass" :key="two_index">
-							<el-menu-item index="5-1">{{ two.title }}</el-menu-item>
+							<router-link :to="{ path: tow.router }">
+								<el-menu-item index="5-1">{{ two.title }}</el-menu-item>
+							</router-link>
 						</div>
 					</el-sub-menu>
 				</div>
@@ -41,7 +45,7 @@ import {
 	Bowl
 } from '@element-plus/icons-vue'
 //reactive深度劫持(深监视)，shallowReactive:浅度劫持(浅监视),ref：深度劫持（深监视),做了reactive处理，shallowRef:不做监视
-import { shallowRef, ref, onMounted, toRefs, reactive } from 'vue'
+import { shallowRef, ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 export default {
 	components: {
@@ -51,9 +55,6 @@ export default {
 		Bowl
 	},
 	setup() {
-		const data_aa = reactive({
-			aaa:""
-		})
 		const router = useRouter()
 		const Array = [
 			{
@@ -120,12 +121,7 @@ export default {
 			localStorage.clear()
 			router.push({ name: "login" })
 		}
-		function add_a(id){
-			data_aa.aaa=menu.value[id-1].router
-			router.push({name:data_aa.aaa})
-			// console.log(data_aa.aaa)
-		}
-		return { menu, Select, ac_index, signOut,...toRefs(data_aa),add_a }
+		return { menu, Select, ac_index, signOut }
 	}
 }
 </script>

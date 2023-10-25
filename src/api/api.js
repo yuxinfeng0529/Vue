@@ -30,6 +30,10 @@ const urls = class {
         const obtaindishes = `${url}/obtaindishes`
         // 下架菜品
         const fromsale = `${url}/fromsale`
+        // 添加员工
+        const addem = `${url}/addem`
+        // 获取员工详情
+        const getemployees = `${url}/getemployees`
         return {
             register,
             login,
@@ -43,7 +47,9 @@ const urls = class {
             dishunit,
             putdishes,
             obtaindishes,
-            fromsale
+            fromsale,
+            addem,
+            getemployees
         }
     }
 }
