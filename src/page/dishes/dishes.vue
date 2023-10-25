@@ -89,7 +89,7 @@ export default {
 		// 下架
 		async function getOut(id, index) {
 			try {
-				const res = await new proxy.$request(proxy.$urls.m().fromsale + "?id" + id).modeget()
+				const res = await new proxy.$request(proxy.$urls.m().fromsale + "?id=" + id).modeget()
 				// oper_data.table_data[index]是数据表里的第(index+1)条数据
 				res.data.data.result[index].onsale = false
 			} catch (e) {
