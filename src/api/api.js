@@ -24,9 +24,12 @@ const urls = class {
         const obtainunit = `${url}/obtainunit`
         //  自定义单位
         const dishunit = `${url}/dishunit`
-        // 获取菜品
+        // 上架菜品
         const putdishes = `${url}/putdishes`
-        
+        // 上架菜品
+        const obtaindishes = `${url}/obtaindishes`
+        // 下架菜品
+        const fromsale = `${url}/fromsale`
         return {
             register,
             login,
@@ -38,7 +41,9 @@ const urls = class {
             obtaincate,
             obtainunit,
             dishunit,
-            putdishes
+            putdishes,
+            obtaindishes,
+            fromsale
         }
     }
 }

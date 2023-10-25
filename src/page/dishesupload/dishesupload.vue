@@ -149,7 +149,7 @@ export default {
             const { id, catevalue, name, unitprice, compvalue, goodsimage } = oper_data
             const obj = {
                 id,
-                caregory: oper_data.catevalue,
+                category: oper_data.catevalue,
                 name,
                 unitprice,
                 unit: oper_data.compvalue,
