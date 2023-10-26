@@ -8,7 +8,7 @@
 			<!-- @select是菜单激活回调的事件 -->
 			<el-menu :default-active="ac_index" @select="Select">
 				<div v-for="(item, index) in menu" :key="index">
-					<router-link :to="{ path: item.router }">
+					<!-- <router-link :to="{ path: item.router }"> -->
 						<el-menu-item v-if="item.SubClass.length == 0" :index="item.id">
 							<el-icon>
 								<!-- component动态组件，可以根据名称来渲染组件 -->
@@ -16,7 +16,7 @@
 							</el-icon>
 							<span>{{ item.title }}</span>
 						</el-menu-item>
-					</router-link>
+					<!-- </router-link> -->
 					<el-sub-menu v-if="item.SubClass.length > 0" :index="item.id">
 						<template #title>
 							<el-icon>
@@ -25,15 +25,15 @@
 							<span>{{ item.title }}</span>
 						</template>
 						<div v-for="(two, two_index) in item.SubClass" :key="two_index">
-							<router-link :to="{ path: tow.router }">
+							<!-- <router-link :to="{ path: tow.router }"> -->
 								<el-menu-item index="5-1">{{ two.title }}</el-menu-item>
-							</router-link>
+							<!-- </router-link> -->
 						</div>
 					</el-sub-menu>
 				</div>
 			</el-menu>
 		</div>
-		<router-view />
+		<router-view></router-view>
 	</div>
 </template>
 
@@ -42,7 +42,8 @@ import {
 	Histogram,
 	UserFilled,
 	CreditCard,
-	Bowl
+	Bowl,
+	Avatar
 } from '@element-plus/icons-vue'
 //reactive深度劫持(深监视)，shallowReactive:浅度劫持(浅监视),ref：深度劫持（深监视),做了reactive处理，shallowRef:不做监视
 import { shallowRef, ref, onMounted } from 'vue'
@@ -52,7 +53,8 @@ export default {
 		Histogram,
 		UserFilled,
 		CreditCard,
-		Bowl
+		Bowl,
+		Avatar
 	},
 	setup() {
 		const router = useRouter()
@@ -87,8 +89,9 @@ export default {
 			},
 			{
 				id: '5',
-				icon: UserFilled,
+				icon: Avatar,
 				title: "员工管理",
+				router: '',
 				SubClass: [
 					{
 						id: "5-1",
