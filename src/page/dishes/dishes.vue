@@ -57,7 +57,6 @@ export default {
 		async function get_dishes() {
 			try {
 				const res = await new proxy.$request(proxy.$urls.m().obtaindishes + "?page=" + oper_data.page).modeget()
-				console.log(res)
 				oper_data.table_data = res.data.data.result
 				oper_data.total = res.data.data.total
 
@@ -91,7 +90,7 @@ export default {
 			try {
 				const res = await new proxy.$request(proxy.$urls.m().fromsale + "?id=" + id).modeget()
 				// oper_data.table_data[index]是数据表里的第(index+1)条数据
-				res.data.data.result[index].onsale = false
+				oper_data.table_data[index].onsale=false
 			} catch (e) {
 				new proxy.$tips('服务器错误', 'error').mess_age()
 			}

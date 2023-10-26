@@ -25,8 +25,8 @@
 							<span>{{ item.title }}</span>
 						</template>
 						<div v-for="(two, two_index) in item.SubClass" :key="two_index">
-							<router-link :to="{ path: two.router }">
-								<el-menu-item index="5-1">{{ two.title }}</el-menu-item>
+							<router-link :to="{ path: two.router }" class="router-link-active">
+								<el-menu-item :index="two.id">{{ two.title }}</el-menu-item>
 							</router-link>
 						</div>
 					</el-sub-menu>
@@ -63,7 +63,7 @@ export default {
 				id: '1',
 				icon: Histogram,//图标组件名称
 				title: "数据分析",//导航栏的项的名称
-				router: 'data',//组件页面的名称
+				router: '',//组件页面的名称
 				SubClass: []//是否有二级菜单
 			},
 			{

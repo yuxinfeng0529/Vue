@@ -34,6 +34,11 @@ const urls = class {
         const addem = `${url}/addem`
         // 获取员工详情
         const getemployees = `${url}/getemployees`
+        // 修改离职状态
+        const modifyresi = `${url}/modifyresi`
+        // 删除员工接口
+        const deleteemp = `${url}/deleteemp`
+
         return {
             register,
             login,
@@ -49,7 +54,9 @@ const urls = class {
             obtaindishes,
             fromsale,
             addem,
-            getemployees
+            getemployees,
+            modifyresi,
+            deleteemp
         }
     }
 }
