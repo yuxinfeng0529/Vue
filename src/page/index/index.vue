@@ -2,13 +2,13 @@
 	<div>
 		<div class="sider-top">
 			<h3>餐饮后台管理系统</h3>
-			<p style="cursor: pointer;" @click="signOut">退出</p>
+			<p @click="signOut">退出</p>
 		</div>
 		<div class="sider-left">
 			<!-- @select是菜单激活回调的事件 -->
 			<el-menu :default-active="ac_index" @select="Select">
 				<div v-for="(item, index) in menu" :key="index">
-					<!-- <router-link :to="{ path: item.router }"> -->
+					<router-link :to="{ path: item.router }" class="router-link-active">
 						<el-menu-item v-if="item.SubClass.length == 0" :index="item.id">
 							<el-icon>
 								<!-- component动态组件，可以根据名称来渲染组件 -->
@@ -16,7 +16,7 @@
 							</el-icon>
 							<span>{{ item.title }}</span>
 						</el-menu-item>
-					<!-- </router-link> -->
+					</router-link>
 					<el-sub-menu v-if="item.SubClass.length > 0" :index="item.id">
 						<template #title>
 							<el-icon>
@@ -25,9 +25,9 @@
 							<span>{{ item.title }}</span>
 						</template>
 						<div v-for="(two, two_index) in item.SubClass" :key="two_index">
-							<!-- <router-link :to="{ path: tow.router }"> -->
+							<router-link :to="{ path: two.router }">
 								<el-menu-item index="5-1">{{ two.title }}</el-menu-item>
-							<!-- </router-link> -->
+							</router-link>
 						</div>
 					</el-sub-menu>
 				</div>
@@ -128,5 +128,9 @@ export default {
 	}
 }
 </script>
-
-<style></style>
+<!--  -->
+<style>
+.router-link-active{
+	text-decoration: none;
+}
+</style>
