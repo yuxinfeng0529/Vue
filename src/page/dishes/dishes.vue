@@ -19,7 +19,7 @@
 				<el-table-column prop="unitprice" label="价格" min-width="100" />
 				<el-table-column label="操作" min-width="100">
 					<template #default="scope">
-						<el-button type="danger">编辑</el-button>
+						<el-button type="primary">编辑</el-button>
 						<el-button type="danger" v-if="scope.row.onsale"
 							@click="getOut(scope.row.name, scope.row._id, scope.$index)">下架</el-button>
 						<el-button type="danger" disabled v-else>已下架</el-button>
@@ -49,8 +49,8 @@ export default {
 			get_dishes()
 		})
 		//分页
-		const currentchange=(e)=>{
-			oper_data.page=e-1
+		const currentchange = (e) => {
+			oper_data.page = e - 1
 			get_dishes()
 		}
 		// 获取菜品
@@ -59,6 +59,7 @@ export default {
 				const res = await new proxy.$request(proxy.$urls.m().obtaindishes + "?page=" + oper_data.page).modeget()
 				oper_data.table_data = res.data.data.result
 				oper_data.total = res.data.data.total
+				console.log(res)
 
 			} catch (e) {
 				new proxy.$tips('服务器错误', 'error').mess_age()
@@ -76,7 +77,7 @@ export default {
 				}
 			)
 				.then(() => {
-					getOut(id,index)
+					getOut(name, id, index)
 				})
 				.catch(() => {
 					ElMessage({
@@ -86,11 +87,11 @@ export default {
 				})
 		}
 		// 下架
-		async function getOut(id, index) {
+		async function getOut(name, id, index) {
 			try {
 				const res = await new proxy.$request(proxy.$urls.m().fromsale + "?id=" + id).modeget()
 				// oper_data.table_data[index]是数据表里的第(index+1)条数据
-				oper_data.table_data[index].onsale=false
+				oper_data.table_data[index].onsale = false
 			} catch (e) {
 				new proxy.$tips('服务器错误', 'error').mess_age()
 			}
