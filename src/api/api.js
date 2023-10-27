@@ -38,6 +38,8 @@ const urls = class {
         const modifyresi = `${url}/modifyresi`
         // 删除员工接口
         const deleteemp = `${url}/deleteemp`
+        // 数据分析
+        const analysis = `${url}/analysis`
 
         return {
             register,
@@ -56,7 +58,8 @@ const urls = class {
             addem,
             getemployees,
             modifyresi,
-            deleteemp
+            deleteemp,
+            analysis
         }
     }
 }

@@ -13,6 +13,12 @@ const routes = [
     name: 'index',
     component: () => import(/* webpackChunkName: "Index" */ '../page/index/index.vue'),
     children: [//嵌套路由
+      // 数据分析
+      {
+        path: '/data',
+        name: 'data',
+        component: () => import(/* webpackChunkName: "Data" */ '../page/data/data.vue')
+      },
       // 用户列表
       {
         path: '/userpage',
@@ -39,10 +45,11 @@ const routes = [
       },
       // 员工管理
       {
-        path:'/role',
-        name:'role',
+        path: '/role',
+        name: 'role',
         component: () => import(/* webpackChunkName: "Role" */ '../page/role/role.vue')
-      }
+      },
+
     ]
   },
 

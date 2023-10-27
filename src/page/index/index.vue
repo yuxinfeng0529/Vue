@@ -63,7 +63,7 @@ export default {
 				id: '1',
 				icon: Histogram,//图标组件名称
 				title: "数据分析",//导航栏的项的名称
-				router: '',//组件页面的名称
+				router: 'data',//组件页面的名称
 				SubClass: []//是否有二级菜单
 			},
 			{
