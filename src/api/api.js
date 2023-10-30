@@ -40,6 +40,8 @@ const urls = class {
         const deleteemp = `${url}/deleteemp`
         // 数据分析
         const analysis = `${url}/analysis`
+        // 数据分析(折线图菜品分类)
+        const switchcate = `${url}/switchcate`
 
         return {
             register,
@@ -59,7 +61,8 @@ const urls = class {
             getemployees,
             modifyresi,
             deleteemp,
-            analysis
+            analysis,
+            switchcate
         }
     }
 }

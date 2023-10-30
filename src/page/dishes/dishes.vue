@@ -59,8 +59,6 @@ export default {
 				const res = await new proxy.$request(proxy.$urls.m().obtaindishes + "?page=" + oper_data.page).modeget()
 				oper_data.table_data = res.data.data.result
 				oper_data.total = res.data.data.total
-				console.log(res)
-
 			} catch (e) {
 				new proxy.$tips('服务器错误', 'error').mess_age()
 			}

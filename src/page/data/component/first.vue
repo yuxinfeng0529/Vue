@@ -20,40 +20,22 @@
 </template>
 <!--  -->
 <script>
-import { onMounted } from 'vue'
 import { Pie, Column } from '@antv/g2plot'
+import { watch } from 'vue';
 export default {
-    setup() {
+    props: { pieData:Array, hisTogram:Array },
+    setup(props) {
         // 饼图
-        function pieChert() {
-            const data = [
-                {
-                    type: '分类一', value: 27
-                },
-                {
-                    type: '分类二', value: 25
-                },
-                {
-                    type: '分类三', value: 18
-                },
-                {
-                    type: '分类四', value: 15
-                },
-                {
-                    type: '分类五', value: 10
-                },
-                {
-                    type: '其他', value: 5
-                },
-            ]
+        function pieChert(data) {
             const piePlot = new Pie('antvpie', {
                 appendPadding: 10,
                 data,
                 angleField: 'value',
-                colorField: 'type',
+                colorField: 'name',
                 radius: 0.8,
                 label: {
                     type: 'outer',
+                    content: '{name}{percentage}'
                 },
                 interactions: [{ type: 'element-active' }],
             });
@@ -61,46 +43,11 @@ export default {
             piePlot.render();
         }
         //柱状图
-        function column() {
-            const data = [
-                {
-                    type: '家具家电',
-                    sales: 38,
-                },
-                {
-                    type: '粮油副食',
-                    sales: 52,
-                },
-                {
-                    type: '生鲜水果',
-                    sales: 61,
-                },
-                {
-                    type: '美容洗护',
-                    sales: 145,
-                },
-                {
-                    type: '母婴用品',
-                    sales: 48,
-                },
-                {
-                    type: '进口食品',
-                    sales: 38,
-                },
-                {
-                    type: '食品饮料',
-                    sales: 38,
-                },
-                {
-                    type: '家庭清洁',
-                    sales: 38,
-                },
-            ];
-
+        function column(data) {
             const columnPlot = new Column('antcol', {
                 data,
-                xField: 'type',
-                yField: 'sales',
+                xField: 'age',
+                yField: 'sales-volume',
                 label: {
                     position: 'middle',
                     style: {
@@ -126,9 +73,11 @@ export default {
 
             columnPlot.render();
         }
-        onMounted(() => {
-            pieChert()
-            column()
+
+        // 数据监听，props是传进来的数据，newVal和oldVal是新旧值
+        watch(props, (newVal, oldVal) => {
+            pieChert(newVal.pieData)
+            column(newVal.hisTogram)
         })
 
         return {}

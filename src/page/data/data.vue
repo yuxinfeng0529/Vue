@@ -1,8 +1,8 @@
 <template>
     <div class="eat-container">
         <h3 style="text-align: left;">数据分析</h3>
-        <First></First>
-        <Second></Second>
+        <First :pieData="pieData" :hisTogram="hisTogram"></First>
+        <Second :lineData="lineData"></Second>
     </div>
 </template>
 <!--  -->
@@ -34,6 +34,7 @@ export default {
         }
         onMounted(() => {
             get_andata()
+            
         })
         return { ...toRefs(state) }
     }

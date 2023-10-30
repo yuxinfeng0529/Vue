@@ -37,6 +37,7 @@ export default {
         Dialog
     },
     setup() {
+        //ref 对象是可更改的，也就是说你可以为 .value 赋予新的值。它也是响应式的，即所有对 .value 的操作都将被追踪，并且写操作会触发与之相关的副作用。
         const dialog = ref()
         const { proxy } = getCurrentInstance()
         const oper_data = reactive({
