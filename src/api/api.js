@@ -42,6 +42,8 @@ const urls = class {
         const analysis = `${url}/analysis`
         // 数据分析(折线图菜品分类)
         const switchcate = `${url}/switchcate`
+        // 编辑菜品
+        const editdishes = `${url}/editdishes`
 
         return {
             register,
@@ -62,7 +64,8 @@ const urls = class {
             modifyresi,
             deleteemp,
             analysis,
-            switchcate
+            switchcate,
+            editdishes,
         }
     }
 }

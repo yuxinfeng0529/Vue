@@ -59,11 +59,13 @@
 import { reactive, toRefs, getCurrentInstance, toRaw, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Plus } from '@element-plus/icons-vue'
+import { goodsData } from '@/store/index.js'// 引入goodsData
 export default {
     components: {
         Plus
     },
     setup() {
+        const store = goodsData()
         const router = useRouter()
         const { proxy } = getCurrentInstance()
         const img_url = proxy.$urls.m().uploadres//获取图片的url
@@ -144,7 +146,7 @@ export default {
 
         }
 
-        //
+        // 提交菜品数据
         async function getCom() {
             const { id, catevalue, name, unitprice, compvalue, goodsimage } = oper_data
             const obj = {
@@ -157,7 +159,8 @@ export default {
             }
             oper_data.setload = true
             try {
-                const res = await new proxy.$request(proxy.$urls.m().putdishes, obj).modepost()
+                const URL = id = '' ? proxy.$urls.m().putdishes : proxy.$urls.m().editdishes
+                const res = await new proxy.$request(URL, obj).modepost()
                 if (res.status != 200) {
                     new proxy.$tips(res.data.msg, 'warning').mess_age()
                 } else {
@@ -170,6 +173,21 @@ export default {
                 new proxy.$tips('服务器错误', 'warning').mess_age()
             }
         }
+
+        // 获取编辑菜品传过来的数据
+        const edit_data = store.stoGoods// 获取仓库的数据
+        if (edit_data) {
+            const value = JSON.parse(edit_data)// 转换成对象 
+            const { category, name, unitprice, unit, image, _id } = value // 解构
+            oper_data.catevalue = category,
+            oper_data.name = name,
+            oper_data.unitprice = JSON.stringify(unitprice),
+            oper_data.unit = unit,
+            oper_data.goodsimage = image,
+            oper_data.id = _id
+        }
+
+
         return {
             ...toRefs(oper_data),
             onpreview,

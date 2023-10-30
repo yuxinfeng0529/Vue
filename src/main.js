@@ -10,6 +10,10 @@ import urls from './api/api.js'
 import request from './api/request.js'
 import tips from './config/tips.js'
 
+// 全局配置pinia
+import { createPinia } from 'pinia'
+const pinia = createPinia()
+
 const app = createApp(App)
 
 app.use(ElementPlus, {
@@ -26,4 +30,5 @@ app.config.globalProperties.$request=request
 // 弹出信息框
 app.config.globalProperties.$tips=tips
 
+app.use(pinia)
 app.mount('#app')

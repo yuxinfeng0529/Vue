@@ -1,14 +1,15 @@
-import { createStore } from 'vuex'
+// pinia的使用
+import { defineStore } from 'pinia'
 
-export default createStore({
-  state: {
+export const goodsData = defineStore('goods_data', {
+  // 数据仓库,最开始stoGoods的初始值为null
+  state: () => {
+    stoGoods: null
   },
-  getters: {
-  },
-  mutations: {
-  },
+  // 将编辑传过来的值存起来
   actions: {
-  },
-  modules: {
+    editItem(value) {
+      this.stoGoods = value// 这个value是点击编辑按钮传过来的值
+    }
   }
 })
