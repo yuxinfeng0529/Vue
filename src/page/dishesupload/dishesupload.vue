@@ -159,7 +159,7 @@ export default {
             }
             oper_data.setload = true
             try {
-                const URL = id = '' ? proxy.$urls.m().putdishes : proxy.$urls.m().editdishes
+                const URL = id == '' ? proxy.$urls.m().putdishes : proxy.$urls.m().editdishes
                 const res = await new proxy.$request(URL, obj).modepost()
                 if (res.status != 200) {
                     new proxy.$tips(res.data.msg, 'warning').mess_age()
@@ -180,11 +180,11 @@ export default {
             const value = JSON.parse(edit_data)// 转换成对象 
             const { category, name, unitprice, unit, image, _id } = value // 解构
             oper_data.catevalue = category,
-            oper_data.name = name,
-            oper_data.unitprice = JSON.stringify(unitprice),
-            oper_data.unit = unit,
-            oper_data.goodsimage = image,
-            oper_data.id = _id
+                oper_data.name = name,
+                oper_data.unitprice = JSON.stringify(unitprice),
+                oper_data.unit = unit,
+                oper_data.goodsimage = image,
+                oper_data.id = _id
         }
 
 

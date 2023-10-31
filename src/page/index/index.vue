@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div >
 		<div class="sider-top">
 			<h3>餐饮后台管理系统</h3>
 			<p @click="signOut">退出</p>
 		</div>
 		<div class="sider-left">
 			<!-- @select是菜单激活回调的事件 -->
-			<el-menu :default-active="ac_index" @select="Select">
+			<el-menu :default-active="ac_index" @select="Select" class="sider-one">
 				<div v-for="(item, index) in menu" :key="index">
 					<router-link :to="{ path: item.router }" class="router-link-active">
 						<el-menu-item v-if="item.SubClass.length == 0" :index="item.id">
@@ -132,5 +132,8 @@ export default {
 <style>
 .router-link-active{
 	text-decoration: none;
+}
+.sider-one{
+	border-style: none;
 }
 </style>

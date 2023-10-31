@@ -2,18 +2,25 @@
 	<div class="eat-container">
 		<h3 style="text-align: left;">菜品管理</h3>
 		<div style="text-align: right;">
-			<router-link :to="{ name: 'dishesupload' }"><el-button type="success" @click="addGoods">添加菜品</el-button></router-link>
+			<router-link :to="{ name: 'dishesupload' }"><el-button type="success"
+					@click="addGoods">添加菜品</el-button></router-link>
 		</div>
 		<div>
-			<el-table :data="table_data" style="width: 100%">
+			<el-table :data="table_data" style="width: 100%" class="cai-lei">
 				<el-table-column prop="time" label="创建时间" min-width="100" />
 				<el-table-column prop="category" label="类目" min-width="100" />
 				<el-table-column prop="name" label="菜品名称" min-width="100" />
 				<el-table-column label="商品图片" min-width="100">
 					<!-- template里的组件下标，获取的值是scope.$index -->
 					<template #default="scope">
-						<el-image style="width: 100px; height: 100px" :preview-teleported="true" fit="cover"
-							:src="scope.row.image[0].url" />
+						<el-image 
+						style="width: 80px; height: 80px" 
+						:preview-teleported="true" 
+						fit="cover"
+						:src="scope.row.image[0].url" 
+						:preview-src-list="[scope.row.image[0].url]"
+						:hide-on-click-modal=true
+						/>
 					</template>
 				</el-table-column>
 				<el-table-column prop="unitprice" label="价格" min-width="100" />
@@ -21,7 +28,8 @@
 					<template #default="scope">
 						<el-button type="primary" @click="Edit(scope.row)">编辑</el-button>
 						<el-button type="danger" v-if="scope.row.onsale"
-							@click="getOut(scope.row.name, scope.row._id, scope.$index)">下架</el-button>
+							@click="ansOut(scope.row.name, scope.row._id, scope.$index)">下架</el-button>
+						<!-- @click="getOut(scope.row.name, scope.row._id, scope.$index)" -->
 						<el-button type="danger" disabled v-else>已下架</el-button>
 					</template>
 				</el-table-column>
@@ -41,7 +49,7 @@ import { useRouter } from 'vue-router'
 export default {
 	setup() {
 		const router = useRouter()
-		const store=goodsData()
+		const store = goodsData()
 		const { proxy } = getCurrentInstance()
 		const oper_data = reactive({
 			table_data: [],// 表格数据
@@ -100,14 +108,14 @@ export default {
 		}
 
 		// 编辑菜品获取数据
-		const Edit=(scope)=>{
-			const val=JSON.stringify(scope)// 获取的数据是对象，所以要转成字符串
+		const Edit = (scope) => {
+			const val = JSON.stringify(scope)// 获取的数据是对象，所以要转成字符串
 			store.editItem(val)// 将获得的数据，传到数据仓库
-			router.push({ name:'dishesupload' })
+			router.push({ name: 'dishesupload' })
 		}
 
 		// 当点击添加菜品的时候，将添加菜品里的字段清空
-		const addGoods=()=>{
+		const addGoods = () => {
 			store.editItem(null)
 		}
 
@@ -123,5 +131,5 @@ export default {
 	}
 }
 </script>
-
+<!--  -->
 <style></style>

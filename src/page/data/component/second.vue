@@ -26,7 +26,7 @@ export default {
     setup(props) {
         const { proxy } = getCurrentInstance()
         const res_data = reactive({
-            sort_radio: "荤菜类",
+            sort_radio: "素菜类",
             line_chert: [],
             radio_arr: ['素菜类', '荤菜类', '酒水类', '龙虾'],
             line_updata: null
@@ -72,7 +72,6 @@ export default {
         async function Switch(val) {
             try {
                 const res = await new proxy.$request(proxy.$urls.m().switchcate + "?cateid=" + val).modeget()
-                console.log(res)
                 res_data.line_updata.changeData(res.data.data)
             } catch (e) {
 
@@ -87,7 +86,6 @@ export default {
 
         // 监听点击的菜品类目
         watch(() => res_data.sort_radio, (newVal, oldVal) => {
-            console.log(newVal)
             Switch(newVal)
         })
 

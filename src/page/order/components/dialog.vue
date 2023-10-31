@@ -34,7 +34,6 @@ export default {
             res.dialogVisible = true
             //接口数据与页面数据对应
             res.datamenu = val
-            console.log(val)
         }
         return { res, Son }
     }

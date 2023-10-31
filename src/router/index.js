@@ -12,6 +12,7 @@ const routes = [
     path: '/index',
     name: 'index',
     component: () => import(/* webpackChunkName: "Index" */ '../page/index/index.vue'),
+    redirect:'/data',
     children: [//嵌套路由
       // 数据分析
       {

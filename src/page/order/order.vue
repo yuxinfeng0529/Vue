@@ -93,7 +93,6 @@ export default {
                 const ORDER = await new proxy.$request(proxy.$urls.m().obtainorder + '?' + query).modeget()
                 //因为这里要请求两个数据接口，所以用到了Promise里的all()方法
                 const res = await Promise.all([TAB, ORDER])
-                console.log(res)
                 //下面就是将接口里的数据和页面数据对应起来
                 oper_data.options = res[0].data.data
                 oper_data.table_data = res[1].data.data.result
@@ -118,7 +117,6 @@ export default {
             try {
                 const res = await new proxy.$request(proxy.$urls.m().vieworder + "?id=" + id).modeget()
                 dialog.value.Son(res.data.data)
-                console.log(res)
                 oper_data.dataload = -1
             } catch (e) {
                 oper_data.dataload = -1

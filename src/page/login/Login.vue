@@ -45,7 +45,6 @@ export default {
             try {
                 // $request这个是请求方法的变量，proxy.$urls.m().register获取接口，obj是post方法里传的参数
                 const res = await new proxy.$request(proxy.$urls.m().login, obj).modepost()
-                console.log(res)
                 if (res.status != 200) {
                     new proxy.$tips(res.data.msg,'warning').mess_age()
                 } else {

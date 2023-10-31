@@ -67,7 +67,6 @@ export default {
                 } else {
                     state.dialogFormVisible = false
                     new proxy.$tips(res.data.msg, 'warning').mess_age()
-                    console.log(res)
                 }
                 state.sub_load=false
             } catch (e) {

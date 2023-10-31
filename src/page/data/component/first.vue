@@ -23,7 +23,7 @@
 import { Pie, Column } from '@antv/g2plot'
 import { watch } from 'vue';
 export default {
-    props: { pieData:Array, hisTogram:Array },
+    props: { pieData: Array, hisTogram: Array },
     setup(props) {
         // 饼图
         function pieChert(data) {
@@ -62,10 +62,10 @@ export default {
                     },
                 },
                 meta: {
-                    type: {
-                        alias: '类别',
+                    'age': {
+                        alias: '类别',//alias表示别名
                     },
-                    sales: {
+                    'sales-volume': {
                         alias: '销售额',
                     },
                 },

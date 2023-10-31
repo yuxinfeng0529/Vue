@@ -46,7 +46,6 @@ export default {
 		async function userlist() {
 			try {
 				const res = await new proxy.$request(proxy.$urls.m().pulluserlist + "?page=" + oper_data.page).modeget()
-				console.log(res)
 				//将表格数据oper_data.userarray和接口数据res.data.data.result对应起来
 				oper_data.user_array = res.data.data.result
 				oper_data.total = res.data.data.total

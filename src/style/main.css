@@ -88,15 +88,15 @@
 	position: fixed;
 	top: 50px;
 	left: 0px;
-	/* border-right:4px solid rgb(220, 223, 230); */
+	border-right:1px solid rgb(220, 223, 230);
 }
 
 /*  */
 .eat-container {
 	position: absolute;
 	left: 230px;
-	top: 80px;
-	width: 1240px;
+	top: 60px;
+	width: 1210px;
 }
 
 .eat-container h3 {
